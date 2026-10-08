@@ -32,19 +32,19 @@ async def test_build_new_message_event():
 async def test_mark_processed():
     factory = EventFactory()
 
-    assert factory.mark_processed("deal1") is True
-    assert factory.mark_processed("deal1") is False
+    assert await factory.mark_processed("deal1") is True
+    assert await factory.mark_processed("deal1") is False
 
 
 @pytest.mark.asyncio
 async def test_review_marking():
     factory = EventFactory()
 
-    factory.mark_review_check("deal1")
-    deals = factory.get_review_check_deals()
+    await factory.mark_review_check("deal1")
+    deals = await factory.get_review_check_deals()
 
     assert "deal1" in deals
 
-    factory.unmark_review_check("deal1")
+    await factory.unmark_review_check("deal1")
 
-    assert "deal1" not in factory.get_review_check_deals()
+    assert "deal1" not in await factory.get_review_check_deals()
